@@ -5,8 +5,11 @@ RUN apk add --no-cache --virtual .build-deps \
     $PHPIZE_DEPS \
     curl-dev \
     imagemagick-dev \
+    ldb-dev \
+    libldap \
     libtool \
     libxml2-dev \
+    openldap-dev \
     postgresql-dev \
     sqlite-dev
 
@@ -60,6 +63,7 @@ RUN docker-php-ext-install \
     gd \
     iconv \
     intl \
+    ldap \
     mbstring \
     pdo \
     pdo_mysql \
