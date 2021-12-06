@@ -1,86 +1,36 @@
-FROM php:8.1.0RC6-alpine3.13
+FROM php:8.1.0-alpine3.15
 
-# Install dev dependencies
-RUN apk add --no-cache --virtual .build-deps \
-    $PHPIZE_DEPS \
-    curl-dev \
-    imagemagick-dev \
-    ldb-dev \
-    libldap \
-    libtool \
-    libxml2-dev \
-    openldap-dev \
-    postgresql-dev \
-    sqlite-dev
+# Add docker-php-extension-installer script
+ADD https://github.com/mlocati/docker-php-extension-installer/releases/latest/download/install-php-extensions /usr/local/bin/
 
-# Install production dependencies
+# Install dependencies
 RUN apk add --no-cache \
     bash \
     curl \
-    freetype-dev \
-    g++ \
-    gcc \
-    git \
-    icu-dev \
-    icu-libs \
-    imagemagick \
-    libc-dev \
-    libjpeg-turbo-dev \
-    libpng-dev \
-    libzip-dev \
-    make \
     mysql-client \
     nodejs \
     npm \
-    oniguruma-dev \
     yarn \
     openssh-client \
-    postgresql-libs \
-    rsync \
-    zlib-dev
-
-# Install PECL and PEAR extensions
-RUN pecl install \
-    redis \
-    imagick \
-    xdebug
-
-# Enable PECL and PEAR extensions
-RUN docker-php-ext-enable \
-    redis \
-    imagick \
-    xdebug
-
-# Configure php extensions
-RUN docker-php-ext-configure gd --with-freetype --with-jpeg
+    rsync
 
 # Install php extensions
-RUN docker-php-ext-install \
+RUN chmod +x /usr/local/bin/install-php-extensions && \
+    install-php-extensions \
+    @composer \
+    redis-stable \
+    imagick-stable \
+    xdebug-stable \
     bcmath \
     calendar \
     exif \
     gd \
     intl \
     ldap \
-    pdo \
     pdo_mysql \
-    pdo_pgsql \
     pcntl \
     soap \
-    xml \
     zip
-
-# Install composer
-ENV COMPOSER_HOME /composer
-ENV PATH ./vendor/bin:/composer/vendor/bin:$PATH
-ENV COMPOSER_ALLOW_SUPERUSER 1
-RUN curl -s https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin/ --filename=composer
-
-# Install PHP_CodeSniffer
-RUN composer global require "squizlabs/php_codesniffer=*"
-
-# Cleanup dev dependencies
-RUN apk del -f .build-deps
 
 # Setup working directory
 WORKDIR /var/www
