@@ -15,7 +15,7 @@ RUN apk add --no-cache \
     icu-libs \
     libc-dev \
     libzip-dev \
-    libldap-dev \
+    libldap \
     make \
     mysql-client \
     nodejs \
