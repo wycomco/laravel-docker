@@ -44,6 +44,7 @@ RUN chmod +x /usr/local/bin/install-php-extensions && \
     pdo_pgsql \
     pcntl \
     soap \
+    ldap \
     zip
 
 # Add local and global vendor bin to PATH.
