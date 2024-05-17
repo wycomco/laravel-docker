@@ -10,6 +10,7 @@ RUN apk add --no-cache \
     freetype-dev \
     g++ \
     gcc \
+    gcompat \
     git \
     icu-dev \
     icu-libs \
@@ -24,7 +25,6 @@ RUN apk add --no-cache \
     yarn \
     openssh-client \
     openldap-dev \
-    postgresql-libs \
     rsync \
     zlib-dev
 
@@ -33,15 +33,13 @@ RUN chmod +x /usr/local/bin/install-php-extensions && \
     install-php-extensions \
     @composer \
     redis-stable \
-    imagick-stable \
-    xdebug-stable \
+    xdebug-beta \
     bcmath \
     calendar \
     exif \
     gd \
     intl \
     pdo_mysql \
-    pdo_pgsql \
     pcntl \
     soap \
     ldap \
