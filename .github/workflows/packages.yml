@@ -17,10 +17,10 @@ jobs:
         include:
           - tag: "latest"
             php: "8.3"
-          - tag: "latest"
-            php: "8.2"
           - tag: "stable"
-            php: "8.2"
+            php: "8.3"
+          - tag: "8.3"
+            php: "8.3"
           - tag: "8.2"
             php: "8.2"
           - tag: "8.1"
