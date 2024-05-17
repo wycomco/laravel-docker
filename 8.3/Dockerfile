@@ -1,4 +1,4 @@
-FROM php:8.0.13-alpine3.13
+FROM php:8.3-alpine3.17
 
 # Add docker-php-extension-installer script
 ADD https://github.com/mlocati/docker-php-extension-installer/releases/latest/download/install-php-extensions /usr/local/bin/
@@ -15,6 +15,7 @@ RUN apk add --no-cache \
     icu-libs \
     libc-dev \
     libzip-dev \
+    libldap \
     make \
     mysql-client \
     nodejs \
@@ -22,6 +23,7 @@ RUN apk add --no-cache \
     oniguruma-dev \
     yarn \
     openssh-client \
+    openldap-dev \
     postgresql-libs \
     rsync \
     zlib-dev
@@ -38,20 +40,15 @@ RUN chmod +x /usr/local/bin/install-php-extensions && \
     exif \
     gd \
     intl \
-    ldap \
-    mbstring \
-    pdo \
     pdo_mysql \
     pdo_pgsql \
     pcntl \
     soap \
+    ldap \
     zip
 
 # Add local and global vendor bin to PATH.
 ENV PATH ./vendor/bin:/composer/vendor/bin:/root/.composer/vendor/bin:/usr/local/bin:$PATH
-
-# Install PHP_CodeSniffer
-RUN composer global require "squizlabs/php_codesniffer=*"
 
 # Setup working directory
 WORKDIR /var/www

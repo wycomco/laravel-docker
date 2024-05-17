@@ -16,6 +16,8 @@ jobs:
       matrix:
         include:
           - tag: "latest"
+            php: "8.3"
+          - tag: "latest"
             php: "8.2"
           - tag: "stable"
             php: "8.2"
