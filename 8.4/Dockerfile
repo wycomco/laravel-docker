@@ -48,7 +48,9 @@ RUN chmod +x /usr/local/bin/install-php-extensions && \
     pcntl \
     soap \
     ldap \
-    zip
+    zip \
+    opentelemetry \
+    amqp
 
 # Install Bun
 RUN wget -q -O /etc/apk/keys/sgerrand.rsa.pub https://alpine-pkgs.sgerrand.com/sgerrand.rsa.pub && \
